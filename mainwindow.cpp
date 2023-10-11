@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
    // connect(ui->LoginButton, SIGNAL(clicked()), this, SLOT(on_LoginButton_clicked()));
    // ui->hide();
    // connect(ui->LoginButton, SIGNAL(clicked()), this, SLOT(show2()));
-    ui->Login_password_2->setEchoMode(QLineEdit::Password);
-    ui->radioButton_4->setChecked(true);
+    ui->Login_password->setEchoMode(QLineEdit::Password);
+    ui->radioButton_2->setChecked(true);
 }
 
 MainWindow::~MainWindow()
@@ -20,10 +20,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_LoginButton_2_clicked()
+void MainWindow::on_LoginButton_clicked()
 {
-   QString username = ui->Login_username_2->text();
-   QString password = ui->Login_password_2->text();
+   QString username = ui->Login_username->text();
+   QString password = ui->Login_password->text();
    qDebug()<<"用户名："<<username<<"密码:"<<password;
    QSqlDatabase db;
    if(QSqlDatabase::contains("qt_sql_default_connection"))
@@ -37,7 +37,7 @@ void MainWindow::on_LoginButton_2_clicked()
    if (!db.open())
    qDebug() << "Failed to connect to root mysql";
     else qDebug() << "open";
-   if( ui->radioButton_3->isChecked()){
+   if( ui->radioButton->isChecked()){
        QSqlQuery query(db);
        db.exec("SET NAMES 'GBK'");
        query.exec("select id,name,permission,password from user");
@@ -68,7 +68,7 @@ void MainWindow::on_LoginButton_2_clicked()
 
     }
 
-   if( ui->radioButton_4->isChecked()){
+   if( ui->radioButton_2->isChecked()){
 
 
    QSqlQuery query(db);
@@ -107,8 +107,8 @@ void MainWindow::on_LoginButton_2_clicked()
 
 
 
-void MainWindow::on_remitButton_2_clicked()
+void MainWindow::on_remitButton_clicked()
 {
-    ui->Login_username_2->clear();
-    ui->Login_password_2->clear();
+    ui->Login_username->clear();
+    ui->Login_password->clear();
 }
