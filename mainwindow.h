@@ -22,9 +22,9 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_LoginButton_2_clicked();
+    void on_LoginButton_clicked();
 
-    void on_remitButton_2_clicked();
+    void on_remitButton_clicked();
 
 signals:
     void sendData(QString);
