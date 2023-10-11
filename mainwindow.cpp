@@ -33,7 +33,7 @@ void MainWindow::on_LoginButton_clicked()
    db.setHostName("localhost");
    db.setDatabaseName("lanzhou");
    db.setUserName("root");
-   db.setPassword("123456");
+   db.setPassword("172901698xl");
    if (!db.open())
    qDebug() << "Failed to connect to root mysql";
     else qDebug() << "open";
@@ -99,12 +99,7 @@ void MainWindow::on_LoginButton_clicked()
 
    }
 
-
-
 }
-
-
-
 
 
 void MainWindow::on_remitButton_clicked()
