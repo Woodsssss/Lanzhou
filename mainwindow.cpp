@@ -32,8 +32,8 @@ void MainWindow::on_LoginButton_clicked()
    db = QSqlDatabase::addDatabase("QMYSQL");;
    db.setHostName("localhost");
    db.setDatabaseName("lanzhou");
-   db.setUserName("root");
-   db.setPassword("172901698xl");
+   db.setUserName(sqluser);
+   db.setPassword(sqlpass);
    if (!db.open())
    qDebug() << "Failed to connect to root mysql";
     else qDebug() << "open";
@@ -49,8 +49,7 @@ void MainWindow::on_LoginButton_clicked()
                       QString pass = query.value(3).toString();
                       qDebug() << user << pass ;
                       if(username.compare(user)==0&&password.compare(pass)==0&&pre==0){
-                          password_qj=password;
-                          username_qj=username;
+                          CUsername=username;
                           T1=true;
                           this->hide();
                           m=new Manager;
@@ -82,8 +81,7 @@ void MainWindow::on_LoginButton_clicked()
                   QString pass = query.value(3).toString();
                   qDebug() << user <<pre<< pass ;
                   if(username.compare(user)==0&&password.compare(pass)==0&&pre==1){
-                      password_qj=password;
-                      username_qj=username;
+                      CUsername=username;
                       T=true;
                       this->hide();
                       u=new User;

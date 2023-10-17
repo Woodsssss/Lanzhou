@@ -29,6 +29,16 @@ private slots:
 
     void on_button_exit_clicked();
 
+    void on_button_insert_clicked();
+
+    void on_button_delete_clicked();
+
+
+
+    void on_pushButton_3_clicked();
+
+    void on_tableWidget_clicked(const QModelIndex &index);
+
 private:
     Ui::Manager *ui;
     bool SortUporDown; // 排序规则

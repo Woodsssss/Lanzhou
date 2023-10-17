@@ -22,8 +22,8 @@
      <rect>
       <x>20</x>
       <y>40</y>
-      <width>841</width>
-      <height>451</height>
+      <width>791</width>
+      <height>461</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -111,80 +111,6 @@
        </property>
       </column>
      </widget>
-     <widget class="QPushButton" name="button_exit">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>410</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>退出</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_insert">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>370</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>插入数据</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_delete">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>410</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>删除数据</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>410</y>
-        <width>191</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="placeholderText">
-       <string>输入要删除的学号</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_save">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>370</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>更新并保存</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_title">
       <property name="geometry">
        <rect>
@@ -207,39 +133,69 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="button_summary">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>370</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>导出名单</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_edit">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>370</y>
-        <width>91</width>
-        <height>31</height>
+        <y>390</y>
+        <width>291</width>
+        <height>51</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="button_insert">
+         <property name="text">
+          <string>插入数据</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_delete">
+         <property name="text">
+          <string>删除数据</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>编辑</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>360</y>
+        <width>101</width>
+        <height>71</height>
+       </rect>
       </property>
-      <property name="text">
-       <string>编辑</string>
-      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="button_summary">
+         <property name="text">
+          <string>导出名单</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_exit">
+         <property name="text">
+          <string>退出</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_2"/>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>40</x>

@@ -1,7 +1,6 @@
 #include "globle.h"
 int num01;
 QString str = "test";
-QString username_qj = "";
-QString password_qj = "";
+QString CUsername = "";
 QString sqluser="root";
-QString sqlpass="123456";
+QString sqlpass="172901698xl";
