@@ -20,6 +20,7 @@ public:
     explicit Manager(QWidget *parent = nullptr);
     ~Manager();
     int get_sql_row();
+    int get_sql_row2();
     void show_table();
 
 private slots:
@@ -38,6 +39,14 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_tableWidget_clicked(const QModelIndex &index);
+
+    void on_button_exit_2_clicked();
+
+    void on_tableWidget_2_clicked(const QModelIndex &index);
+
+
+
+    void on_button_delete_2_clicked();
 
 private:
     Ui::Manager *ui;

@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QStackedWidget>
 #include <globle.h>
+#include <QTabWidget>
 // SQL 相关
 #include <QtSql>
 #include <QSqlDatabase>
@@ -13,8 +14,10 @@
 #include <QMessageBox>
 
 QSqlQuery *sql;
+QSqlQuery *sql2;
 QSqlDatabase db;
 QModelIndex mIndex;
+QModelIndex mIndex2;
 Manager::Manager(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Manager)
@@ -36,6 +39,7 @@ Manager::Manager(QWidget *parent) :
     {
         qDebug() << "打开数据库成功";
         sql = new QSqlQuery(db);
+        sql2 = new QSqlQuery(db);
     }
     else
     {
@@ -68,13 +72,28 @@ int Manager::get_sql_row()
     }
     return row;
 }
+
+// 获取数据库中的行数
+int Manager::get_sql_row2()
+{
+    int row = 0;
+    // 获取数据库中的行数b
+    QString cmd = "select count(*) from testproject;";
+    if (sql->exec(cmd))
+    {
+        qDebug() << sql;
+        while (sql->next()){
+            row = sql->value(0).toInt();
+        }
+    }
+    return row;
+}
 // 从数据库中填充表格
 void Manager::show_table()
 {
-        qDebug() << "运行到这1";
+
     // 设置正确行数
     ui->tableWidget->setRowCount(this->get_sql_row());
-    qDebug() << "运行到这2";
     // 获取数据库
     QString cmd = "select * from user;";
     if (sql->exec(cmd))
@@ -93,6 +112,71 @@ void Manager::show_table()
             ui->tableWidget->setItem(row, 1, new QTableWidgetItem(name));
             ui->tableWidget->setItem(row, 2, new QTableWidgetItem(permission));
             ui->tableWidget->setItem(row, 3, new QTableWidgetItem(password));
+            row++;
+        }
+    }
+    else
+        qDebug() << "数据获取失败" << sql->lastError().text();
+
+
+
+
+
+    //table2
+    ui->tableWidget_2->setRowCount(this->get_sql_row2());
+    QString cmd2 = "select * from testproject;";
+    if (sql->exec(cmd2))
+    {
+        int row = 0;
+        while (sql->next())
+        {
+            // 获取数据库内容
+            QString id = sql->value(0).toString();
+            QString projectname = sql->value(1).toString();
+            QString testid = sql->value(2).toString();
+            QString c ;
+            c= "select * from user where user.id = "+testid+";";
+            QString testname ="";
+            if(sql2->exec(c)){
+                while (sql2->next()){
+                    testname=sql2->value(1).toString();
+                }
+            }
+            QString equip = sql->value(3).toString();
+            QString time = sql->value(4).toString();
+            QString state = sql->value(5).toString();
+            QString stepsid = sql->value(7).toString();
+            c="select * from teststep where teststep.id = "+stepsid+";";
+            QString teststep ="";
+            if(sql2->exec(c)){
+                while (sql2->next()){
+                    teststep=sql2->value(1).toString();
+                }
+            }
+            QString resultid = sql->value(8).toString();
+            c="select * from testresult where testresult.id = "+resultid+";";
+            QString testresult ="";
+            if(sql2->exec(c)){
+                while (sql2->next()){
+                    testresult=sql2->value(1).toString();
+                }
+            }
+
+
+
+            // 展示表格内容
+            ui->tableWidget_2->setItem(row, 0, new QTableWidgetItem(id));
+            ui->tableWidget_2->setItem(row, 1, new QTableWidgetItem(projectname));
+            ui->tableWidget_2->setItem(row, 2, new QTableWidgetItem(testname));
+            ui->tableWidget_2->setItem(row, 3, new QTableWidgetItem(equip));
+            ui->tableWidget_2->setItem(row, 4, new QTableWidgetItem(time));
+            if(state =="0"){
+                ui->tableWidget_2->setItem(row, 5, new QTableWidgetItem("已完成"));
+            }else {
+                ui->tableWidget_2->setItem(row, 5, new QTableWidgetItem("未完成"));
+            }
+            ui->tableWidget_2->setItem(row, 6, new QTableWidgetItem(teststep));
+            ui->tableWidget_2->setItem(row, 7, new QTableWidgetItem(testresult));
             row++;
         }
     }
@@ -233,3 +317,35 @@ void Manager::on_pushButton_3_clicked()
 }
 
 
+
+void Manager::on_button_exit_2_clicked()
+{
+    this->close();
+}
+
+void Manager::on_tableWidget_2_clicked(const QModelIndex &index)
+{
+    mIndex2=index;
+}
+
+
+void Manager::on_button_delete_2_clicked()
+{
+    if(mIndex2.row()==-1 &&mIndex2.column()==-1){
+           QMessageBox::critical(this, tr("Error"),  tr("请在表格中选择一个数据"),
+                                              QMessageBox::Yes);
+           return;
+       }
+       QString cmd = "delete from testproject where id="+ui->tableWidget_2->item(mIndex2.row(), 0)->text();
+
+       if (sql->exec(cmd))
+           {
+               // 成功才会更新展示并返回，否则都会收到提示框
+               this->show_table();
+               return;
+           }
+           else
+               qDebug() << "数据删除失败" << sql->lastError().text();
+
+       QMessageBox::warning(this, tr("删除信息"), tr("输入有误，请检查！"), QMessageBox::Ok);
+}
