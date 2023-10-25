@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QTableWidget" name="tableWidget">
@@ -138,7 +138,6 @@
        <rect>
         <x>20</x>
         <y>350</y>
-
         <width>291</width>
         <height>51</height>
        </rect>
@@ -198,7 +197,6 @@
        <rect>
         <x>20</x>
         <y>410</y>
-
         <width>291</width>
         <height>22</height>
        </rect>
@@ -364,26 +362,36 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="layoutWidget_5">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>420</y>
-        <width>201</width>
-        <height>22</height>
+        <x>40</x>
+        <y>400</y>
+        <width>284</width>
+        <height>25</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QPushButton" name="button_delete_2">
          <property name="text">
-          <string>查询工程：</string>
+          <string>删除数据</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="project_name"/>
-
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>查询工程：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="project_name"/>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
