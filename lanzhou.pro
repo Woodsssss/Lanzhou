@@ -9,17 +9,25 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    globle.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    manager.cpp \
+    user.cpp
 
 HEADERS += \
-    mainwindow.h
+    globle.h \
+    mainwindow.h \
+    manager.h \
+    user.h
 
 FORMS += \
-    form.ui \
-    mainwindow.ui \
-    page1.ui
+    manager.ui \
+    user.ui \
+    mainwindow.ui
 
+
+QT       += sql
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
