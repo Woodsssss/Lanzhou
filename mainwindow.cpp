@@ -49,7 +49,8 @@ void MainWindow::on_LoginButton_clicked()
                       QString pass = query.value(3).toString();
                       qDebug() << user << pass ;
                       if(username.compare(user)==0&&password.compare(pass)==0&&pre==0){
-                          CUsername=username;
+                          userid=query.value(0).toString();
+                          CUsername=user;
                           T1=true;
                           this->hide();
                           m=new Manager;
@@ -81,7 +82,8 @@ void MainWindow::on_LoginButton_clicked()
                   QString pass = query.value(3).toString();
                   qDebug() << user <<pre<< pass ;
                   if(username.compare(user)==0&&password.compare(pass)==0&&pre==1){
-                      CUsername=username;
+                      userid=query.value(0).toString();
+                      CUsername=user;
                       T=true;
                       this->hide();
                       u=new User;

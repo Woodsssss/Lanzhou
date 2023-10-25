@@ -1,5 +1,6 @@
 #ifndef USER_H
 #define USER_H
+#include"select.h"
 
 #include <QMainWindow>
 
@@ -14,9 +15,20 @@ class User : public QMainWindow
 public:
     explicit User(QWidget *parent = nullptr);
     ~User();
+    void show_table();
+    int get_sql_row();
+    int get_sql_row2();
+
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_button_insert_clicked();
 
 private:
     Ui::User *ui;
+    Select *select;
 };
 
 #endif // USER_H

@@ -13,18 +13,13 @@
 #include <QString>
 #include <QMessageBox>
 
-QSqlQuery *sql;
-QSqlQuery *sql2;
-QSqlDatabase db;
-QModelIndex mIndex;
-QModelIndex mIndex2;
+
 Manager::Manager(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Manager)
 {
     ui->setupUi(this);   
     qDebug() << ui->stackedWidget->count();
-    SortUporDown = true; // 默认升序
 
     // 初始化数据库
     if(QSqlDatabase::contains("qt_sql_default_connection"))
@@ -351,6 +346,8 @@ void Manager::on_button_delete_2_clicked()
 
        QMessageBox::warning(this, tr("删除信息"), tr("输入有误，请检查！"), QMessageBox::Ok);
 }
+
+
 
 void Manager::locate()
 {
