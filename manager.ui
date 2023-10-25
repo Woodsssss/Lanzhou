@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QTableWidget" name="tableWidget">
@@ -137,7 +137,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>390</y>
+        <y>350</y>
         <width>291</width>
         <height>51</height>
        </rect>
@@ -189,6 +189,28 @@
           <string>退出</string>
          </property>
         </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>410</y>
+        <width>291</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>请输入用户账号：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="user_account"/>
        </item>
       </layout>
      </widget>
@@ -314,7 +336,7 @@
       </column>
       <column>
        <property name="text">
-        <string>新建列</string>
+        <string>检测时间</string>
        </property>
       </column>
       <column>
@@ -359,14 +381,37 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="layoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>420</y>
+        <width>201</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>查询工程：</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="project_name"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
+    <widget class="QWidget" name="page_3"/>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>40</x>
       <y>10</y>
-      <width>163</width>
+      <width>244</width>
       <height>25</height>
      </rect>
     </property>
@@ -382,6 +427,13 @@
       <widget class="QPushButton" name="pushButton_2">
        <property name="text">
         <string>测试工程管理</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>检测项管理</string>
        </property>
       </widget>
      </item>

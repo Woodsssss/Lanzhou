@@ -34,8 +34,6 @@ private slots:
 
     void on_button_delete_clicked();
 
-
-
     void on_pushButton_3_clicked();
 
     void on_tableWidget_clicked(const QModelIndex &index);
@@ -44,13 +42,14 @@ private slots:
 
     void on_tableWidget_2_clicked(const QModelIndex &index);
 
-
-
     void on_button_delete_2_clicked();
+
+    void locate();
+
+    void locate_2();
 
 private:
     Ui::Manager *ui;
-    bool SortUporDown; // 排序规则
 };
 
 #endif // MANAGER_H

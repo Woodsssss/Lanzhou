@@ -13,18 +13,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     manager.cpp \
-    user.cpp
+    user.cpp \
+    select.cpp
 
 HEADERS += \
     globle.h \
     mainwindow.h \
     manager.h \
-    user.h
+    user.h \
+    select.h
 
 FORMS += \
     manager.ui \
     user.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    select.ui
 
 
 QT       += sql

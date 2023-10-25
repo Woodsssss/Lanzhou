@@ -13,18 +13,13 @@
 #include <QString>
 #include <QMessageBox>
 
-QSqlQuery *sql;
-QSqlQuery *sql2;
-QSqlDatabase db;
-QModelIndex mIndex;
-QModelIndex mIndex2;
+
 Manager::Manager(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Manager)
 {
     ui->setupUi(this);   
     qDebug() << ui->stackedWidget->count();
-    SortUporDown = true; // 默认升序
 
     // 初始化数据库
     if(QSqlDatabase::contains("qt_sql_default_connection"))
@@ -51,6 +46,9 @@ Manager::Manager(QWidget *parent) :
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);             // 禁用编辑
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // 自适应
     this->show_table();                                                             // 填充数据
+    connect(ui->user_account,SIGNAL(textChanged(QString)),this,SLOT(locate()));
+    connect(ui->project_name,SIGNAL(textChanged(QString)),this,SLOT(locate_2()));
+
 }
 
 Manager::~Manager()
@@ -348,4 +346,53 @@ void Manager::on_button_delete_2_clicked()
                qDebug() << "数据删除失败" << sql->lastError().text();
 
        QMessageBox::warning(this, tr("删除信息"), tr("输入有误，请检查！"), QMessageBox::Ok);
+}
+
+
+void Manager::locate()
+{
+    QString input_name =ui->user_account->text();
+    int row_num=this->get_sql_row();
+    if(input_name==""){
+        for(int i=0;i<row_num;i++){
+            ui->tableWidget->setRowHidden(i,false);
+        }
+    }
+    else{
+        QList <QTableWidgetItem *> item = ui->tableWidget->findItems(ui->user_account->text(),Qt::MatchContains);
+        //隐藏所有行
+        for(int i=0;i<row_num;i++){
+            ui->tableWidget->setRowHidden(i,true);//隐藏
+        }
+        if(!item.empty()){
+            //恢复对应的行
+            for(int i=0;i<item.count();i++){
+                ui->tableWidget->setRowHidden(item.at(i)->row(),false);
+            }
+        }
+    }
+}
+
+void Manager::locate_2()
+{
+    QString input_name =ui->project_name->text();
+    int row_num=this->get_sql_row2();
+    if(input_name==""){
+        for(int i=0;i<row_num;i++){
+            ui->tableWidget_2->setRowHidden(i,false);
+        }
+    }
+    else{
+        QList <QTableWidgetItem *> item = ui->tableWidget_2->findItems(ui->project_name->text(),Qt::MatchContains);
+        //隐藏所有行
+        for(int i=0;i<row_num;i++){
+            ui->tableWidget_2->setRowHidden(i,true);//隐藏
+        }
+        if(!item.empty()){
+            //恢复对应的行
+            for(int i=0;i<item.count();i++){
+                ui->tableWidget_2->setRowHidden(item.at(i)->row(),false);
+            }
+        }
+    }
 }
