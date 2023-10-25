@@ -48,7 +48,6 @@ Manager::Manager(QWidget *parent) :
     this->show_table();                                                             // 填充数据
     connect(ui->user_account,SIGNAL(textChanged(QString)),this,SLOT(locate()));
     connect(ui->project_name,SIGNAL(textChanged(QString)),this,SLOT(locate_2()));
-
 }
 
 Manager::~Manager()
@@ -347,6 +346,7 @@ void Manager::on_button_delete_2_clicked()
 
        QMessageBox::warning(this, tr("删除信息"), tr("输入有误，请检查！"), QMessageBox::Ok);
 }
+
 
 
 void Manager::locate()

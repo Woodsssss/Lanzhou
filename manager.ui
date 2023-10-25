@@ -36,7 +36,7 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>60</x>
         <y>50</y>
         <width>741</width>
         <height>291</height>
@@ -138,6 +138,7 @@
        <rect>
         <x>20</x>
         <y>350</y>
+
         <width>291</width>
         <height>51</height>
        </rect>
@@ -169,7 +170,7 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>660</x>
+        <x>690</x>
         <y>360</y>
         <width>101</width>
         <height>71</height>
@@ -197,6 +198,7 @@
        <rect>
         <x>20</x>
         <y>410</y>
+
         <width>291</width>
         <height>22</height>
        </rect>
@@ -237,25 +239,6 @@
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
-     </widget>
-     <widget class="QWidget" name="layoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>400</y>
-        <width>111</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QPushButton" name="button_delete_2">
-         <property name="text">
-          <string>删除数据</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">
@@ -400,6 +383,7 @@
        </item>
        <item>
         <widget class="QLineEdit" name="project_name"/>
+
        </item>
       </layout>
      </widget>
@@ -409,7 +393,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>10</y>
       <width>244</width>
       <height>25</height>
