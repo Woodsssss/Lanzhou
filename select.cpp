@@ -265,3 +265,8 @@ void Select::traverseTree(QTreeWidgetItem *item){
 }
 
 
+
+void Select::on_pushButton_2_clicked()
+{
+    this->close();
+}
