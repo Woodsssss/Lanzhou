@@ -26,6 +26,8 @@ private slots:
 
     void on_button_insert_clicked();
 
+    void on_button_exit_clicked();
+
 private:
     Ui::User *ui;
     Select *select;

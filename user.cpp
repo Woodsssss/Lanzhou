@@ -195,3 +195,10 @@ void User::on_button_insert_clicked()
     select =new Select;
     select ->show();
 }
+
+void User::on_button_exit_clicked()
+{
+    this->close();
+}
+
+

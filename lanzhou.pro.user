@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.8.2, 2023-10-25T16:55:37. -->
+<!-- Written by QtCreator 4.13.1, 2023-10-27T17:12:41. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -320,9 +320,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">lanzhou2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/code/test2/Lanzhou-main/Lanzhou-main/lanzhou.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">F:/code/test2/Lanzhou-main/Lanzhou-main/lanzhou.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/code/test2/Lanzhou/lanzhou.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">F:/code/test2/Lanzhou/lanzhou.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

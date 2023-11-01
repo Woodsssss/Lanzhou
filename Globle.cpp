@@ -9,3 +9,4 @@ QSqlQuery *sql2;
 QSqlDatabase db;
 QModelIndex mIndex;
 QModelIndex mIndex2;
+QModelIndex mIndex3;
