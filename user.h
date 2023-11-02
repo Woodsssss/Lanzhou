@@ -19,6 +19,8 @@ public:
     int get_sql_row();
     int get_sql_row2();
 
+
+
 private slots:
     void on_pushButton_clicked();
 
@@ -27,6 +29,8 @@ private slots:
     void on_button_insert_clicked();
 
     void on_button_exit_clicked();
+
+    void refresh();
 
 private:
     Ui::User *ui;

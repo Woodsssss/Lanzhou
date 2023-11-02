@@ -47,7 +47,10 @@ User::User(QWidget *parent) :
     // 表格控件初始化
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);             // 禁用编辑
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // 自适应
-    this->show_table();                                                             //
+    this->show_table();
+
+    select =new Select;
+    connect(select, &Select::windowClosed, this, &User::refresh);
 }
 
 User::~User()
@@ -192,10 +195,13 @@ void User::show_table(){
 
 void User::on_button_insert_clicked()
 {
-    select =new Select;
+
     select ->show();
 }
-
+void User::refresh()
+{
+    this->show_table();
+}
 void User::on_button_exit_clicked()
 {
     this->close();
