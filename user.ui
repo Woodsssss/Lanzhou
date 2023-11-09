@@ -61,7 +61,7 @@
        <rect>
         <x>20</x>
         <y>50</y>
-        <width>741</width>
+        <width>341</width>
         <height>321</height>
        </rect>
       </property>
@@ -123,11 +123,6 @@
         <string>检测项名称</string>
        </property>
       </column>
-      <column>
-       <property name="text">
-        <string>测试模式</string>
-       </property>
-      </column>
      </widget>
      <widget class="QLabel" name="label_title">
       <property name="geometry">
@@ -176,17 +171,83 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="button_summary">
-         <property name="text">
-          <string>详细配置</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="button_exit">
          <property name="text">
           <string>退出</string>
          </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>60</y>
+        <width>331</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>测试模式：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="creater">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="model">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>创建人：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="name">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>检测项名称：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>测试步骤：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QTreeWidget" name="treeWidget">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
         </widget>
        </item>
       </layout>

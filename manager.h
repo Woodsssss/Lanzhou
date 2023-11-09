@@ -7,6 +7,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QtSql>
+#include"select.h"
 
 namespace Ui {
 class Manager;
@@ -23,6 +24,7 @@ public:
     int get_sql_row2();
     int get_sql_row3();
     void show_table();
+
 
 private slots:
     void on_pushButton_clicked();
@@ -59,9 +61,14 @@ private slots:
 
     void on_button_delete_3_clicked();
 
+    void refresh();
+
+    void on_button_insert_4_clicked();
+
 
 private:
     Ui::Manager *ui;
+    Select *select;
 };
 
 #endif // MANAGER_H

@@ -50,7 +50,9 @@ User::User(QWidget *parent) :
     this->show_table();
 
     select =new Select;
+    edit = new editOptions;
     connect(select, &Select::windowClosed, this, &User::refresh);
+    connect(edit, &editOptions::windowClosed, this, &User::refresh);
 }
 
 User::~User()
@@ -121,8 +123,6 @@ void User::show_table(){
             // 展示表格内容
             ui->tableWidget->setItem(row, 0, new QTableWidgetItem(id));
             ui->tableWidget->setItem(row, 1, new QTableWidgetItem(name));
-            ui->tableWidget->setItem(row, 2, new QTableWidgetItem(createrbyid));
-            ui->tableWidget->setItem(row, 3, new QTableWidgetItem(testmode));
             row++;
         }
     }
@@ -198,9 +198,12 @@ void User::on_button_insert_clicked()
 
     select ->show();
 }
+
 void User::refresh()
 {
+    qDebug()<<"shuaxin";
     this->show_table();
+    on_tableWidget_clicked(mIndex);
 }
 void User::on_button_exit_clicked()
 {
@@ -208,3 +211,168 @@ void User::on_button_exit_clicked()
 }
 
 
+
+void User::on_tableWidget_clicked(const QModelIndex &index)
+{
+    mIndex=index;
+    QString cmd = "select * from teststep where id="+ui->tableWidget->item(mIndex.row(), 0)->text();
+
+        if (sql->exec(cmd))
+        {
+            while (sql->next())
+            {
+                // 获取数据库内容
+                QString id = sql->value(0).toString();
+                QString name = sql->value(1).toString();
+                QString createrid = sql->value(2).toString();
+                QString testmode = sql->value(3).toString();
+                QString steps = sql->value(4).toString();
+                ui->name->setText(name);
+                QString qsql = "select name from user where id="+createrid;
+                if (sql2->exec(qsql)){
+                    while (sql2->next()){
+                        ui->creater->setText(sql2->value(0).toString());
+                    }
+                }
+                if(testmode=="1"){
+                    ui->model->setText("全自动测试");
+                }else{
+                    ui->model->setText("手动测试");
+                }
+
+                setSteps(steps);
+            }
+        }
+        else
+            qDebug() << "数据获取失败" << sql->lastError().text();
+}
+
+void User::on_button_change_clicked()
+{
+    if(mIndex.row()==-1 &&mIndex.column()==-1){
+        QMessageBox::critical(this, tr("Error"),  tr("请在表格中选择一个数据"),
+                                           QMessageBox::Yes);
+        return;
+    }
+
+    edit->getId(ui->tableWidget->item(mIndex.row(),0)->text());
+    edit->show();
+}
+
+void User::setSteps(QString str){
+    ui->treeWidget->clear();    //初始化树形控件
+    ui->treeWidget->setHeaderHidden(true);  //隐藏表头
+    check1=false;
+    check2=false;
+    check3=false;
+    check4=false;
+    check5=false;
+    check6=false;
+    existingParent1=NULL;
+    existingParent2=NULL;
+    existingParent3=NULL;
+    existingParent4=NULL;
+    existingParent5=NULL;
+    existingParent6=NULL;
+    QStringList stringList = str.split(";");
+
+    // 遍历QStringList并输出每个字符串内容
+    for (const QString &s : stringList) {
+        if(s!=""){
+            QString qsql = "select * from step where id ="+ s;
+            if(sql2->exec(qsql)){
+                while(sql2->next()){
+                    QString Type = sql2->value(2).toString();
+                    QString Name = sql2->value(1).toString();
+                    if(Type == "功耗检查"){
+                        if (!check1){
+                            QTreeWidgetItem* subItem11 = new QTreeWidgetItem(ui->treeWidget);
+                            //subItem11->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+                            subItem11->setText(0, "功耗检查");  //设置子项显示的文本
+                            //subItem11->setCheckState(0, Qt::Unchecked); //设置子选项的显示格式和状态
+                            check1=true;
+                            existingParent1=subItem11;
+                        }
+                        //孙子项
+                        QTreeWidgetItem* subItem = new QTreeWidgetItem(existingParent1);   //指定子项属于哪一个父项
+//                        subItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+                        subItem->setText(0, Name);
+//                        subItem->setCheckState(0, Qt::Unchecked);
+//                        subItem->setFlags(subItem->flags() & ~Qt::ItemIsUserCheckable);
+                    }else if(Type == "基准电压精度检查"){
+                        if (!check2){
+                            QTreeWidgetItem* subItem12 = new QTreeWidgetItem(ui->treeWidget);
+//                            subItem12->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+                            subItem12->setText(0, "基准电压精度检查");
+//                            subItem12->setCheckState(0, Qt::Unchecked);
+                            check2=true;
+                            existingParent2=subItem12;
+                        }
+                        //孙子项
+                        QTreeWidgetItem* subItem = new QTreeWidgetItem(existingParent2);   //指定子项属于哪一个父项
+//                        subItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+                        subItem->setText(0, Name);
+//                        subItem->setCheckState(0, Qt::Unchecked);
+                    }else if(Type == "输入信号特征检查"){
+                        if (!check3){
+                            QTreeWidgetItem* subItem13 = new QTreeWidgetItem(ui->treeWidget);
+//                            subItem13->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+                            subItem13->setText(0, "输入信号特征检查");
+//                            subItem13->setCheckState(0, Qt::Unchecked);
+                            check3=true;
+                            existingParent3=subItem13;
+                        }
+                        //孙子项
+                        QTreeWidgetItem* subItem = new QTreeWidgetItem(existingParent3);   //指定子项属于哪一个父项
+//                        subItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+                        subItem->setText(0, Name);
+//                        subItem->setCheckState(0, Qt::Unchecked);
+                    }else if(Type == "优先级别检查"){
+                        if (!check4){
+                            QTreeWidgetItem* group2 = new QTreeWidgetItem(ui->treeWidget);
+                            group2->setText(0, "优先级别检查");
+//                            group2->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+//                            group2->setCheckState(0, Qt::Unchecked);
+                            check4=true;
+                            existingParent4=group2;
+                        }
+                        //孙子项
+                        QTreeWidgetItem* subItem = new QTreeWidgetItem(existingParent4);   //指定子项属于哪一个父项
+//                        subItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+                        subItem->setText(0, Name);
+//                        subItem->setCheckState(0, Qt::Unchecked);
+                    }else if(Type == "余度检查"){
+                        if (!check5){
+                            QTreeWidgetItem* group3 = new QTreeWidgetItem(ui->treeWidget);
+                            group3->setText(0, "余度检查");
+//                            group3->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+//                            group3->setCheckState(0, Qt::Unchecked);
+                            check5=true;
+                            existingParent5=group3;
+                        }
+                        //孙子项
+                        QTreeWidgetItem* subItem = new QTreeWidgetItem(existingParent5);   //指定子项属于哪一个父项
+//                        subItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+                        subItem->setText(0, Name);
+//                        subItem->setCheckState(0, Qt::Unchecked);
+                    }else{
+                        if (!check6){
+                            QTreeWidgetItem* group4 = new QTreeWidgetItem(ui->treeWidget);
+                            group4->setText(0, "429通信检查");
+//                            group4->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+//                            group4->setCheckState(0, Qt::Unchecked);
+                            check6=true;
+                            existingParent6=group4;
+                        }
+                        //孙子项
+                        QTreeWidgetItem* subItem = new QTreeWidgetItem(existingParent6);   //指定子项属于哪一个父项
+//                        subItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+                        subItem->setText(0, Name);
+//                        subItem->setCheckState(0, Qt::Unchecked);
+                    }
+
+                }
+            }
+        }
+    }
+}

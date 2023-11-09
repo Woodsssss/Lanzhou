@@ -1,5 +1,6 @@
 #include "manager.h"
 #include "ui_manager.h"
+#include "select.h"
 #include <QDebug>
 #include <QStackedWidget>
 #include <globle.h>
@@ -41,7 +42,7 @@ Manager::Manager(QWidget *parent) :
         qDebug() << "打开数据库失败";
     }
 
-
+    select =new Select;
     // 表格控件初始化
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);             // 禁用编辑
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // 自适应
@@ -49,6 +50,7 @@ Manager::Manager(QWidget *parent) :
     connect(ui->user_account,SIGNAL(textChanged(QString)),this,SLOT(locate()));
     connect(ui->project_name,SIGNAL(textChanged(QString)),this,SLOT(locate_2()));
     connect(ui->step_name,SIGNAL(textChanged(QString)),this,SLOT(locate_3()));
+    connect(select, &Select::windowClosed, this, &Manager::refresh);
 }
 
 Manager::~Manager()
@@ -583,3 +585,13 @@ void Manager::locate_3()
 }
 
 
+
+void Manager::on_button_insert_4_clicked()
+{
+    select ->show();
+}
+
+void Manager::refresh()
+{
+    this->show_table();
+}

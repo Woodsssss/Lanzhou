@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QTableWidget" name="tableWidget">
@@ -539,13 +539,6 @@
         <widget class="QPushButton" name="button_delete_3">
          <property name="text">
           <string>删除数据</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>编辑</string>
          </property>
         </widget>
        </item>

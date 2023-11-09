@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    editoptions.cpp \
     globle.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     select.cpp
 
 HEADERS += \
+    editoptions.h \
     globle.h \
     mainwindow.h \
     manager.h \
@@ -24,6 +26,7 @@ HEADERS += \
     select.h
 
 FORMS += \
+    editoptions.ui \
     manager.ui \
     user.ui \
     mainwindow.ui \

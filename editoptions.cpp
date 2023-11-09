@@ -1,8 +1,10 @@
-#include "select.h"
-#include "ui_select.h"
+#include "editoptions.h"
+#include "ui_editoptions.h"
+
 #include <QListWidget>
 #include <QPushButton>
 #include <globle.h>
+
 // SQL 相关
 #include <QtSql>
 #include <QSqlDatabase>
@@ -11,13 +13,13 @@
 
 #include <QString>
 #include <QMessageBox>
+#include "user.h"
 
-Select::Select(QWidget *parent) :
+editOptions::editOptions(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Select)
+    ui(new Ui::editOptions)
 {
     ui->setupUi(this);
-
     // 初始化数据库
     if(QSqlDatabase::contains("qt_sql_default_connection"))
          db = QSqlDatabase::database("qt_sql_default_connection");
@@ -37,7 +39,10 @@ Select::Select(QWidget *parent) :
     {
         qDebug() << "打开数据库失败";
     }
+
     init();
+
+
     connect(ui->treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(onTreeItemChanged(QTreeWidgetItem*, int)));
 
     totalItemCount = 0;
@@ -49,16 +54,17 @@ Select::Select(QWidget *parent) :
         traverseTree(topLevelItem);
      }
     this->flag = 0;
+
 }
 
-Select::~Select()
+editOptions::~editOptions()
 {
     delete ui;
 }
 
-
-void Select::init()
+void editOptions::init()
 {
+
     ui->treeWidget->clear();    //初始化树形控件
     ui->treeWidget->setHeaderHidden(true);  //隐藏表头
     ui->radioButton->setChecked(true); //设置全自动模式选中
@@ -154,7 +160,7 @@ void Select::init()
 
 
 
-void Select::updateParentItem(QTreeWidgetItem* item)
+void editOptions::updateParentItem(QTreeWidgetItem* item)
 {
     QTreeWidgetItem *parent = item->parent();
     if (parent == NULL)
@@ -177,15 +183,13 @@ void Select::updateParentItem(QTreeWidgetItem* item)
     else if (nSelectedCount > 0 && nSelectedCount < childCount)    //如果有部分子项被选中，父项设置为部分选中状态，即用灰色显示
         parent->setCheckState(0, Qt::PartiallyChecked);
     else if (nSelectedCount == childCount)    //如果子项全部被选中，父项则设置为选中状态
-    {   parent->setCheckState(0, Qt::Checked);
-        return;
-    }
+        parent->setCheckState(0, Qt::Checked);
 
     updateParentItem(parent);
 
 }
 
-void Select::onTreeItemChanged(QTreeWidgetItem* item, int column)
+void editOptions::onTreeItemChanged(QTreeWidgetItem* item, int column)
 {
     int count = item->childCount(); //返回子项的个数
 
@@ -213,18 +217,8 @@ void Select::onTreeItemChanged(QTreeWidgetItem* item, int column)
 
 
 
-void Select::on_pushButton_clicked()
+void editOptions::on_pushButton_clicked()
 {
-    if(ui->project_name->text()==""){
-        QMessageBox msgBox(QMessageBox::Critical, tr("Error"), tr("请输入检测项名称"), QMessageBox::Yes, this);
-        msgBox.exec();
-        // 在点击"Yes"按钮后关闭消息框
-        if (msgBox.clickedButton() == msgBox.button(QMessageBox::Yes))
-        {
-            msgBox.close();
-        }
-        return;
-    }
 
     //遍历QTreeWidget的项
     // 遍历QTreeWidget的项
@@ -240,7 +234,7 @@ void Select::on_pushButton_clicked()
 
 }
 
-void Select::saveSelectedLeafItemsRecursive(QTreeWidgetItem* item)
+void editOptions::saveSelectedLeafItemsRecursive(QTreeWidgetItem* item)
 {
     visitedItemCount++;
     QString itemName = ui->project_name->text();
@@ -289,25 +283,29 @@ void Select::saveSelectedLeafItemsRecursive(QTreeWidgetItem* item)
         }
         if(totalItemCount==visitedItemCount&&this->flag==0){
             // 将选中的项存入数据库，假设使用SQL语句插入数据
-
-                QString sql = QString("INSERT INTO teststep (id,Name,CreatedById,TestMode,Steps)  values('%1','%2','%3','%4','%5')").arg(maxId+1).arg(itemName).arg(userid.toInt()).arg(itemMode).arg(itemText);
-                QSqlQuery query;
-                if (query.exec(sql)) {
-                    // 插入成功
-                    qDebug() << "Item saved to database";
-                } else {
-                    // 插入失败
-                    qDebug() << "Failed to save item to database";
-                }
-                this->flag = 1;
-
+            QString sql = QString("UPDATE teststep SET id='%1', Name='%2', CreatedById='%3', TestMode='%4', Steps='%5' WHERE id='%6'")
+                .arg(id)
+                .arg(itemName)
+                .arg(userid.toInt())
+                .arg(itemMode)
+                .arg(itemText)
+                .arg(id);
+            QSqlQuery query;
+            if (query.exec(sql)) {
+                // 插入成功
+                qDebug() << "Item saved to database";
+            } else {
+                // 插入失败
+                qDebug() << "Failed to save item to database";
+            }
+            this->flag = 1;
         }
     }
 
 }
 
 
-void Select::traverseTree(QTreeWidgetItem *item){
+void editOptions::traverseTree(QTreeWidgetItem *item){
     totalItemCount++;
 
     int childCount = item->childCount();
@@ -321,8 +319,108 @@ void Select::traverseTree(QTreeWidgetItem *item){
 
 
 
-void Select::on_pushButton_2_clicked()
+void editOptions::on_pushButton_2_clicked()
 {
     this->close();
+}
+
+
+void editOptions::handleItemSelected(){
+    if(db.open()){
+      QString searchValue = this->id;
+      QSqlQuery query;
+      query.prepare("SELECT * FROM teststep WHERE id = :value");
+      query.bindValue(":value",searchValue);
+      if(query.exec()){
+          // 处理结果
+          while (query.next()) {
+              // 获取每一行的数据
+              QVariant name = query.value("Name");
+              QVariant testmode = query.value("TestMode");
+              QVariant steps = query.value("Steps");
+
+              // 在这里处理每一行的数据
+              // ...
+              qDebug()<<"拿到的结果："<< name<<testmode<<steps;
+
+              if(name.canConvert<QString>()){
+                  QString pname = name.toString();
+                  ui->project_name->setText(pname);
+              }else{
+                  qDebug() << "类型无法转换";
+              }
+
+              if(testmode.canConvert<int>()){
+                  int ptestmode = testmode.toInt();
+                  if(ptestmode == 1) {
+                      ui->radioButton->setChecked(true);
+                  }
+                  else{
+                      ui->radioButton_2->setChecked(true);
+                  }
+              }else{
+                  qDebug() << "类型无法转换";
+              }
+
+              if(steps.canConvert<QString>()){
+                 QList<QString> stepList = steps.toString().split(";");
+                 //删除其中的 空项
+                 for (auto iter = stepList.begin(); iter != stepList.end(); ) {
+                     if (iter->isEmpty()) {
+                         iter = stepList.erase(iter);  // 删除空项，并返回指向下一个元素的迭代器
+                     } else {
+                         ++iter;  // 移动到下一个元素
+                     }
+                 }
+                 QList<QString> checkStepList;
+                 for(auto iter = stepList.begin(); iter != stepList.end();++iter){
+
+                     QString cmd = "select Name from step where Id="+ *iter +" ;";
+                     if(sql->exec(cmd)){
+                         if (sql->next()) {
+                             checkStepList.append(sql->value(0).toString());
+                         }
+                     }else{
+                         qDebug()<<"数据库执行错误";
+                     }
+                 }
+                 //根据checkStepList中的名字，设置treewidget中的项为真
+                 // 遍历根节点
+                 for (int i = 0; i < ui->treeWidget->topLevelItemCount(); i++) {
+                     QTreeWidgetItem *rootItem = ui->treeWidget->topLevelItem(i);
+                     setLeafNodeSelection(rootItem, checkStepList);
+                 }
+
+
+              }
+          }
+      }else{
+          qDebug()<<"sql执行出错!";
+    }
+   }else{
+       qDebug()<<"sql执行出错!";
+    }
+}
+
+void editOptions::getId(QString newid){
+       this->id = newid;
+       handleItemSelected();
+}
+
+void editOptions::setLeafNodeSelection(QTreeWidgetItem *item, const QStringList &checkStepList) {
+    if (item->childCount() == 0) {
+        // 当前节点为叶子节点
+        QString nodeName = item->text(0);
+        if (checkStepList.contains(nodeName)) {
+            item->setCheckState(0, Qt::Checked); // 设置选择状态为 true
+        }else{
+            item->setCheckState(0, Qt::Unchecked); // 设置选择状态为 true
+        }
+    } else {
+        // 当前节点为父节点
+        for (int i = 0; i < item->childCount(); i++) {
+            setLeafNodeSelection(item->child(i), checkStepList); // 递归遍历子节点
+        }
+    }
 }
 
