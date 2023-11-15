@@ -1,7 +1,12 @@
 #include "globle.h"
-int num01;
-QString str = "test";
-QString username_qj = "";
-QString password_qj = "";
+
+QString userid ;
+QString CUsername = "";
 QString sqluser="root";
-QString sqlpass="123456";
+QString sqlpass="172901698xl";
+QSqlQuery *sql;
+QSqlQuery *sql2;
+QSqlDatabase db;
+QModelIndex mIndex;
+QModelIndex mIndex2;
+QModelIndex mIndex3;
