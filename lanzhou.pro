@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     manager.cpp \
+    result.cpp \
     user.cpp \
     select.cpp
 
@@ -22,12 +23,14 @@ HEADERS += \
     globle.h \
     mainwindow.h \
     manager.h \
+    result.h \
     user.h \
     select.h
 
 FORMS += \
     editoptions.ui \
     manager.ui \
+    result.ui \
     user.ui \
     mainwindow.ui \
     select.ui

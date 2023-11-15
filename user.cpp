@@ -268,6 +268,7 @@ void User::setSteps(QString str){
     check4=false;
     check5=false;
     check6=false;
+
     existingParent1=NULL;
     existingParent2=NULL;
     existingParent3=NULL;
