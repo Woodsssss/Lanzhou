@@ -51,6 +51,7 @@ User::User(QWidget *parent) :
 
     select =new Select;
     edit = new editOptions;
+    Result = new result;
     connect(select, &Select::windowClosed, this, &User::refresh);
     connect(edit, &editOptions::windowClosed, this, &User::refresh);
 }
@@ -376,4 +377,10 @@ void User::setSteps(QString str){
             }
         }
     }
+}
+
+void User::on_pushButton_3_clicked()
+{
+
+    Result->show();
 }

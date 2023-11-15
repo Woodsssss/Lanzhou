@@ -2,9 +2,11 @@
 #define USER_H
 #include"editoptions.h"
 #include"select.h"
+#include"result.h"
 
 #include <QMainWindow>
 class editOptions;
+class result;
 
 namespace Ui {
     class User;
@@ -37,10 +39,13 @@ private slots:
 
     void on_tableWidget_clicked(const QModelIndex &index);
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::User *ui;
     Select *select;
     editOptions *edit;
+    result *Result;
     bool check1;
         bool check2;
         bool check3;
