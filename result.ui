@@ -73,10 +73,12 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QTableWidget" name="tableWidget">
-      <property name="selectionMode">
-       <enum>QAbstractItemView::NoSelection</enum>
-      </property>
+     <widget class="QTreeWidget" name="treeWidget">
+      <column>
+       <property name="text">
+        <string notr="true">1</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>
@@ -103,7 +105,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="projects">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -228,11 +230,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>470</y>
+     <x>70</x>
+     <y>460</y>
      <width>237</width>
      <height>22</height>
     </rect>
@@ -246,17 +248,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="step_name"/>
+     <widget class="QLineEdit" name="project_name"/>
     </item>
    </layout>
   </widget>
-  <zorder>step_name</zorder>
-  <zorder>gridLayoutWidget</zorder>
-  <zorder>label_title</zorder>
-  <zorder>tableWidget</zorder>
-  <zorder>layoutWidget_18</zorder>
-  <zorder>label_5</zorder>
-  <zorder>layoutWidget_19</zorder>
  </widget>
  <resources/>
  <connections/>

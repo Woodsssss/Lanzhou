@@ -4,7 +4,6 @@
 #include <QStackedWidget>
 #include <globle.h>
 #include <QTabWidget>
-#include "result.h"
 // SQL 相关
 #include <QtSql>
 #include <QSqlDatabase>
@@ -55,6 +54,7 @@ User::User(QWidget *parent) :
     Result = new result;
     connect(select, &Select::windowClosed, this, &User::refresh);
     connect(edit, &editOptions::windowClosed, this, &User::refresh);
+    connect(Result, &result::windowClosed, this, &User::refresh);
 }
 
 User::~User()
@@ -382,7 +382,6 @@ void User::setSteps(QString str){
 
 void User::on_pushButton_3_clicked()
 {
+
     Result->show();
 }
-
-

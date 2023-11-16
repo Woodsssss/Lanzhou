@@ -16,8 +16,16 @@ public:
     ~result();
     void show_table();
     int get_sql_row();
-    void on_tableWidget_clicked(const QModelIndex &index);
+    void detailInfor(QString result);
     void refresh();
+
+signals:
+    void windowClosed(); // 窗口关闭信号
+
+private slots:
+    void locate();
+
+    void on_projects_clicked(const QModelIndex &index);
 
 private:
     Ui::result *ui;
