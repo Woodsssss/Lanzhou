@@ -4,6 +4,7 @@
 #include <QStackedWidget>
 #include <globle.h>
 #include <QTabWidget>
+#include "result.h"
 // SQL 相关
 #include <QtSql>
 #include <QSqlDatabase>
@@ -381,6 +382,7 @@ void User::setSteps(QString str){
 
 void User::on_pushButton_3_clicked()
 {
-
     Result->show();
 }
+
+

@@ -16,10 +16,8 @@ public:
     ~result();
     void show_table();
     int get_sql_row();
-
-
-private slots:
-    void locate();
+    void on_tableWidget_clicked(const QModelIndex &index);
+    void refresh();
 
 private:
     Ui::result *ui;

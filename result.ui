@@ -31,14 +31,14 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLabel" name="creater">
+     <widget class="QLabel" name="equipment">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLabel" name="model">
+     <widget class="QLabel" name="time">
       <property name="text">
        <string/>
       </property>
@@ -77,21 +77,6 @@
       <property name="selectionMode">
        <enum>QAbstractItemView::NoSelection</enum>
       </property>
-      <column>
-       <property name="text">
-        <string>测试类别</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>测试步骤名称</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>测试结果</string>
-       </property>
-      </column>
      </widget>
     </item>
    </layout>
@@ -118,7 +103,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTableWidget" name="projects">
+  <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -246,8 +231,8 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>460</y>
+     <x>50</x>
+     <y>470</y>
      <width>237</width>
      <height>22</height>
     </rect>
@@ -261,10 +246,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="project_name"/>
+     <widget class="QLineEdit" name="step_name"/>
     </item>
    </layout>
   </widget>
+  <zorder>step_name</zorder>
+  <zorder>gridLayoutWidget</zorder>
+  <zorder>label_title</zorder>
+  <zorder>tableWidget</zorder>
+  <zorder>layoutWidget_18</zorder>
+  <zorder>label_5</zorder>
+  <zorder>layoutWidget_19</zorder>
  </widget>
  <resources/>
  <connections/>
