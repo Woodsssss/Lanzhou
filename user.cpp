@@ -54,6 +54,7 @@ User::User(QWidget *parent) :
     Result = new result;
     connect(select, &Select::windowClosed, this, &User::refresh);
     connect(edit, &editOptions::windowClosed, this, &User::refresh);
+    connect(Result, &result::windowClosed, this, &User::refresh);
 }
 
 User::~User()

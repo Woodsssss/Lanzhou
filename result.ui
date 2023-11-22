@@ -31,14 +31,14 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLabel" name="creater">
+     <widget class="QLabel" name="equipment">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLabel" name="model">
+     <widget class="QLabel" name="time">
       <property name="text">
        <string/>
       </property>
@@ -73,23 +73,10 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QTableWidget" name="tableWidget">
-      <property name="selectionMode">
-       <enum>QAbstractItemView::NoSelection</enum>
-      </property>
+     <widget class="QTreeWidget" name="treeWidget">
       <column>
        <property name="text">
-        <string>测试类别</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>测试步骤名称</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>测试结果</string>
+        <string notr="true">1</string>
        </property>
       </column>
      </widget>
@@ -243,7 +230,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>70</x>

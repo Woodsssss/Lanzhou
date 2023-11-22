@@ -3,7 +3,7 @@
 QString userid ;
 QString CUsername = "";
 QString sqluser="root";
-QString sqlpass="172901698xl";
+QString sqlpass="123456";
 QSqlQuery *sql;
 QSqlQuery *sql2;
 QSqlDatabase db;
